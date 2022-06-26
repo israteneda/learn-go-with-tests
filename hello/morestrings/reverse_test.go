@@ -1,27 +1,19 @@
 package morestrings
 
-import (
-	"fmt"
-	"testing"
-)
+import "testing"
 
-func TestRepeat(t *testing.T) {
-	repeated := Repeat(5, "a")
-	expected := "aaaaa"
-
-	if repeated != expected {
-		t.Errorf("expected %q but got %q", expected, repeated)
-	}
-}
-
-func ExampleRepeat() {
-	repeated := Repeat(3, "z")
-	fmt.Println(repeated)
-	// Output: zzz
-}
-
-func BenchmarkRepeat(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Repeat(5, "a")
-	}
+func TestReverseRunes(t *testing.T) {
+    cases := []struct {
+        in, want string
+    }{
+        {"Hello, world", "dlrow ,olleH"},
+        {"Hello, 世界", "界世 ,olleH"},
+        {"", ""},
+    }
+    for _, c := range cases {
+        got := ReverseRunes(c.in)
+        if got != c.want {
+            t.Errorf("ReverseRunes(%q) == %q, want %q", c.in, got, c.want)
+        }
+    }
 }
